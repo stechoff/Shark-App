@@ -1,0 +1,38 @@
+name: Build Shark Control APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code herunterladen
+        uses: actions/checkout@v4
+
+      - name: Java 17 einrichten
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Gradle einrichten
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.4'
+
+      - name: Gradle Wrapper initialisieren
+        run: gradle wrapper --gradle-version 8.4
+
+      - name: APK bauen
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: APK bereitstellen
+        uses: actions/upload-artifact@v4
+        with:
+          name: SharkControl-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
