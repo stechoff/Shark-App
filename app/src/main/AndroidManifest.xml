@@ -29,8 +29,8 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="com.sharkninja.shark"
-                      android:host="com.sharkninja.shark"
-                      android:pathPrefix="/callback"/>
+                      android:host="logineu.sharkninja.com"
+                      android:path="/android/com.sharkninja.shark/callback"/>
             </intent-filter>
         </activity>
 
