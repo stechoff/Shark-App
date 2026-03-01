@@ -316,7 +316,7 @@ public class AylaApiClient {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Accept", "application/json");
-        if (accessToken != null) conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        if (accessToken != null) conn.setRequestProperty("Authorization", "auth_token " + accessToken);
         conn.setConnectTimeout(10000); conn.setReadTimeout(10000);
         int code = conn.getResponseCode();
         if (code >= 200 && code < 300) return readStream(conn.getInputStream());
@@ -329,7 +329,7 @@ public class AylaApiClient {
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
-        if (accessToken != null) conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        if (accessToken != null) conn.setRequestProperty("Authorization", "auth_token " + accessToken);
         conn.setDoOutput(true); conn.setConnectTimeout(10000); conn.setReadTimeout(10000);
         conn.getOutputStream().write(body.toString().getBytes(StandardCharsets.UTF_8));
         int code = conn.getResponseCode();
