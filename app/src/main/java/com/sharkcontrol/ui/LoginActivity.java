@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String CLIENT_ID    = "rKDx9O18dBrY3eoJMTkRiBZHDvd9Mx1I";
     private static final String AUTH_BASE    = "https://logineu.sharkninja.com";
     private static final String API_BASE     = "https://api-eu.sharkninja.com";
-    private static final String REDIRECT_URI = "com.sharkninja.shark://com.sharkninja.shark/callback";
+    private static final String REDIRECT_URI = "com.sharkninja.shark://logineu.sharkninja.com/android/com.sharkninja.shark/callback";
     private static final String SCOPE        = "openid profile email offline_access read:users read:current_user read:user_idp_tokens";
 
     private WebView webView;
