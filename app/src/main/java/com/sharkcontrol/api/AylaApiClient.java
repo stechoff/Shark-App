@@ -97,7 +97,7 @@ public class AylaApiClient {
     public void getDevices(Callback<List<SharkDevice>> callback) {
         executor.execute(() -> {
             try {
-                String response = get(API_BASE + "/v1/devices");
+                String response = get(API_BASE + "/apiv1/devices.json");
                 JSONArray devicesJson;
                 try {
                     devicesJson = new JSONArray(response);
@@ -127,7 +127,7 @@ public class AylaApiClient {
     public void getDeviceStatus(String dsn, Callback<RobotStatus> callback) {
         executor.execute(() -> {
             try {
-                String response = get(API_BASE + "/v1/devices/" + dsn + "/properties");
+                String response = get(API_BASE + "/apiv1/devices.json/" + dsn + "/properties");
                 JSONArray props;
                 try {
                     props = new JSONArray(response);
@@ -171,7 +171,7 @@ public class AylaApiClient {
                 }
                 JSONObject body = new JSONObject();
                 body.put("datapoint", new JSONObject().put("value", val));
-                postJson(API_BASE + "/v1/devices/" + dsn + "/properties/SET_Operating_Mode/datapoints", body);
+                postJson(API_BASE + "/apiv1/devices.json/" + dsn + "/properties/SET_Operating_Mode/datapoints", body);
                 callback.onSuccess(null);
             } catch (Exception e) {
                 callback.onError(e.getMessage());
@@ -184,7 +184,7 @@ public class AylaApiClient {
             try {
                 JSONObject body = new JSONObject();
                 body.put("datapoint", new JSONObject().put("value", mode));
-                postJson(API_BASE + "/v1/devices/" + dsn + "/properties/SET_Power_Mode/datapoints", body);
+                postJson(API_BASE + "/apiv1/devices.json/" + dsn + "/properties/SET_Power_Mode/datapoints", body);
                 callback.onSuccess(null);
             } catch (Exception e) { callback.onError(e.getMessage()); }
         });
@@ -193,7 +193,7 @@ public class AylaApiClient {
     public void getMapData(String dsn, Callback<MapData> callback) {
         executor.execute(() -> {
             try {
-                String response = get(API_BASE + "/v1/devices/" + dsn + "/properties"
+                String response = get(API_BASE + "/apiv1/devices.json/" + dsn + "/properties"
                         + "?names[]=GET_Robot_Map_Data&names[]=GET_Robot_Position&names[]=GET_Charging_Station_Position");
                 JSONArray props = new JSONArray(response);
                 String mapRaw = null, robotPos = null, chargePos = null;
@@ -245,7 +245,7 @@ public class AylaApiClient {
     public void getSchedules(String dsn, Callback<List<Schedule>> callback) {
         executor.execute(() -> {
             try {
-                String response = get(API_BASE + "/v1/devices/" + dsn + "/properties/GET_Schedule_Data/datapoints?limit=1");
+                String response = get(API_BASE + "/apiv1/devices.json/" + dsn + "/properties/GET_Schedule_Data/datapoints?limit=1");
                 List<Schedule> schedules = new ArrayList<>();
                 JSONArray dps = new JSONArray(response);
                 if (dps.length() > 0) {
@@ -305,7 +305,7 @@ public class AylaApiClient {
                 }
                 JSONObject body = new JSONObject();
                 body.put("datapoint", new JSONObject().put("value", arr.toString()));
-                postJson(API_BASE + "/v1/devices/" + dsn + "/properties/SET_Schedule_Data/datapoints", body);
+                postJson(API_BASE + "/apiv1/devices.json/" + dsn + "/properties/SET_Schedule_Data/datapoints", body);
                 callback.onSuccess(null);
             } catch (Exception e) { callback.onError(e.getMessage()); }
         });
